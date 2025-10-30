@@ -5,10 +5,9 @@ package main
 
 import "fmt"
 
-func main() {
+func array(a [10]int) {
 	s := make([]int, 0)
 	seen := make(map[int]bool)
-	var a [10]int = [10]int{1, 2, 3, 4, 1, 2, 2, 1, 9, 6}
 	for i := 0; i < len(a); i++ {
 		fmt.Println("use len(), index = ", i, "value = ", a[i])
 		for j := i + 1; j < len(a); j++ {
@@ -23,5 +22,28 @@ func main() {
 		}
 	}
 	fmt.Println("结果", s)
+}
+func findSingleNumber(a [10]int) []int {
+	countMap := make(map[int]int)
+	s := make([]int, 0)
 
+	for i := 0; i < len(a); i++ {
+		countMap[a[i]]++
+	}
+	fmt.Println("只出现一次的数字是:", countMap)
+
+	for num, count := range countMap {
+		if count == 1 {
+			// 添加数据
+			s = append(s, num)
+		}
+	}
+
+	return s // 如果没有找到，返回-1
+}
+func main() {
+	var a [10]int = [10]int{1, 2, 3, 4, 1, 2, 2, 1, 9, 6}
+	// array(a)
+	result := findSingleNumber(a)
+	fmt.Println("只出现一次的数字是:", result) // 输出: 只出现一次的数字是: 3
 }
